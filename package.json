@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "n": "nodemon ./src/app.ts",
     "dev": "ts-node-dev src/app.ts",
     "lint": "ts-standard",
     "start": "node build/app.js",
