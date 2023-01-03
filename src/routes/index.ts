@@ -16,7 +16,7 @@ readdirSync(PATH_ROUTER).filter((fileName) => {
       console.log(`${cleanName}`)
       router.use(`/${cleanName}`, moduleRouter.router)
     }).catch((e) => {
-      console.log(e)
+      console.error(e.message)
     })
   }
   return null
