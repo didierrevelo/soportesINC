@@ -19,4 +19,9 @@ const sequelize = new Sequelize(database, username, password, {
   dialect
 })
 
-export { sequelize }
+const dbAutenticate = async (): Promise<any> => {
+  await sequelize.authenticate()
+  await sequelize.sync()
+}
+
+export { sequelize, dbAutenticate }
