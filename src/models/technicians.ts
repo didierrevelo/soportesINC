@@ -1,8 +1,12 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/postgres'
-import { Services } from './services'
+// import { Services } from './services'
+import {
+  TechniciansModel,
+  TechniciansAddModels
+} from '../interfaces/technicians.interfaces'
 
-const Technicians = sequelize.define(
+const Technicians = sequelize.define<TechniciansModel, TechniciansAddModels>(
   'technicians', {
     id: {
       type: DataTypes.INTEGER,
@@ -14,7 +18,7 @@ const Technicians = sequelize.define(
       unique: true
     },
     documentNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       unique: true
     },
     email: {
@@ -22,7 +26,7 @@ const Technicians = sequelize.define(
       unique: true
     },
     cellPhone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       unique: true
     },
     address: {
@@ -37,14 +41,14 @@ const Technicians = sequelize.define(
   }
 )
 
-Technicians.hasMany(Services, {
-  foreignKey: 'technicianId',
-  sourceKey: 'id'
-})
+// Technicians.hasMany(Services, {
+//   foreignKey: 'technicianId',
+//   sourceKey: 'id'
+// })
 
-Services.belongsTo(Technicians, {
-  foreignKey: 'technicianId',
-  targetKey: 'id'
-})
+// Services.belongsTo(Technicians, {
+//   foreignKey: 'technicianId',
+//   targetKey: 'id'
+// })
 
-export { Technicians }
+export { Technicians, TechniciansModel, TechniciansAddModels }

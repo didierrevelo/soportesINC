@@ -1,7 +1,11 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/postgres'
+import {
+  ServicesModel,
+  ServicesAddModels
+} from '../interfaces/services.interfaces'
 
-const Services = sequelize.define(
+const Services = sequelize.define<ServicesModel, ServicesAddModels>(
   'services',
   {
     id: {
@@ -10,14 +14,10 @@ const Services = sequelize.define(
       autoIncrement: true
     },
     typeService: {
-      type: DataTypes.ENUM('instalacion', 'matenimiento', 'reparacion'),
-      defaultValue: 'instalacion'
-    },
-    technicalId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.ENUM('instalacion', 'mantenimiento', 'reparacion')
     },
     visitDay: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE('YYYY-MM-DD')
     },
     done: {
       type: DataTypes.BOOLEAN,
@@ -25,6 +25,9 @@ const Services = sequelize.define(
     },
     comments: {
       type: DataTypes.STRING
+    },
+    technicianId: {
+      type: DataTypes.INTEGER
     }
   },
   {
@@ -32,4 +35,4 @@ const Services = sequelize.define(
   }
 )
 
-export { Services }
+export { Services, ServicesModel, ServicesAddModels }

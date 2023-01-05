@@ -1,8 +1,12 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/postgres'
+import {
+  UsersModel,
+  UsersAddModels
+} from '../interfaces/users.interfaces'
 import { Services } from './services'
 
-const Users = sequelize.define(
+const Users = sequelize.define<UsersModel, UsersAddModels>(
   'users',
   {
     id: {
@@ -15,14 +19,14 @@ const Users = sequelize.define(
       unique: true
     },
     documentNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       unique: true
     },
     email: {
       type: DataTypes.STRING
     },
     cellPhone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       unique: true
     },
     address: {
@@ -51,4 +55,4 @@ Services.belongsTo(Users, {
   targetKey: 'id'
 })
 
-export { Users }
+export { Users, UsersModel, UsersAddModels }
