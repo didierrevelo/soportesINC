@@ -1,45 +1,37 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
+import { deleteTechnician, getTechnician, getTechnicians, updateTechnician } from '../controllers/technicians'
 
 const router = Router()
 
 /**
  * Creating a route for the `GET` method.
- * http://localhost:3001/technicians [GET]
+ * http://localhost:3001/service [GET]
  */
-router.get('/', (_req, res) => {
-  res.send({ data: 'Here put the models' })
-})
+router.get('/', getTechnicians)
 
 /**
  * Creating a route for the `POST` method.
- * http://localhost:3001/technicians [POST]
+ * http://localhost:3001/service [POST]
  */
-router.post('/', (_req, res) => {
-  res.send({ data: 'Post technicians' })
-})
+// router.post('/', postTechnician)
 
 /**
  * Creating a route for the `GET` method.
- * http://localhost:3001/technicians/id [GET]
+ * http://localhost:3001/service/id [GET]
  */
-router.get('/:id', (_req, res) => {
-  res.send({ data: 'Get for id technicians' })
-})
+router.get('/:id', getTechnician)
 
 /**
  * Creating a route for the `PUT` method.
- * http://localhost:3001/technicians/id [PUT]
+ * http://localhost:3001/service/id [PUT]
  */
-router.put('/:id', (_req, res) => {
-  res.send({ data: 'Put for id technicians' })
-})
+router.put('/:id', updateTechnician)
 
 /**
  * Creating a route for the `DELETE` method.
- * http://localhost:3001/technicians/id [DELETE]
+ * http://localhost:3001/service/id [DELETE]
  */
-router.delete('/:id', (_req, res) => {
-  res.send({ data: 'delete for id technicians' })
-})
+router.delete('/:id', deleteTechnician)
 
 export { router }
