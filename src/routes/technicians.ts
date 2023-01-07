@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
 import { deleteTechnician, getTechnician, getTechnicians, updateTechnician } from '../controllers/technicians'
+import { checkJwt } from '../middleware/session'
+import { checkRol } from '../middleware/rolUser'
+import { validatorRegister } from '../validators/auth.validator'
 
 const router = Router()
 
@@ -8,30 +11,24 @@ const router = Router()
  * Creating a route for the `GET` method.
  * http://localhost:3001/service [GET]
  */
-router.get('/', getTechnicians)
-
-/**
- * Creating a route for the `POST` method.
- * http://localhost:3001/service [POST]
- */
-// router.post('/', postTechnician)
+router.get('/', checkJwt, checkRol(['admin', 'tech']), getTechnicians)
 
 /**
  * Creating a route for the `GET` method.
  * http://localhost:3001/service/id [GET]
  */
-router.get('/:id', getTechnician)
+router.get('/:id', checkJwt, checkRol(['admin', 'tech']), getTechnician)
 
 /**
  * Creating a route for the `PUT` method.
  * http://localhost:3001/service/id [PUT]
  */
-router.put('/:id', updateTechnician)
+router.put('/:id', checkJwt, validatorRegister, checkRol(['admin']), updateTechnician)
 
 /**
  * Creating a route for the `DELETE` method.
  * http://localhost:3001/service/id [DELETE]
  */
-router.delete('/:id', deleteTechnician)
+router.delete('/:id', checkJwt, checkRol(['admin']), deleteTechnician)
 
 export { router }

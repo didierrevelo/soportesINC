@@ -2,11 +2,11 @@
 import { Router } from 'express'
 import {
   RegisterTechnician,
-  registerUser
-  // ,
-  // TechLoginCtrol,
-  // userLoginCtrol
+  registerUser,
+  TechLoginCtrol,
+  userLoginCtrol
 } from '../controllers/auth'
+import { validatorLogin, validatorRegister } from '../validators/auth.validator'
 
 const router = Router()
 
@@ -14,24 +14,24 @@ const router = Router()
  * Creating a route for the`POST` method.
  * http://localhost:3001/auth/registerTech [POST]
  */
-router.post('/registerTech', RegisterTechnician)
+router.post('/registerTech', validatorRegister, RegisterTechnician)
 
 /**
  * Creating a route for the`POST` method.
  * http://localhost:3001/auth/loginTech [POST]
  */
-// router.post('/loginTech', TechLoginCtrol)
+router.post('/loginTech', validatorLogin, TechLoginCtrol)
 
 /**
  * Creating a route for the `POST` method.
  * http://localhost:3001/auth/registerUser [POST]
  */
-router.post('/registerUser', registerUser)
+router.post('/registerUser', validatorRegister, registerUser)
 
 /**
  * Creating a route for the`POST` method.
- * http://localhost:3001/auth/userTech [POST]
+ * http://localhost:3001/auth/loginUser [POST]
  */
-// router.post('/userTech', userLoginCtrol)
+router.post('/loginUser', validatorLogin, userLoginCtrol)
 
 export { router }
