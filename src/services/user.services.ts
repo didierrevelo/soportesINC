@@ -1,13 +1,8 @@
-import { Users, UsersAddModels } from '../models/user'
+import { Users, findAllData, findOneData } from '../models/user'
 import { filtered, filteredASC, filteredDESC } from '../utils/filter.handle'
 
-const insertUser = async (user: UsersAddModels): Promise<any> => {
-  const responseInsert = await Users.create(user)
-  return responseInsert
-}
-
 const getUsersService = async (req: any): Promise<any> => {
-  const user = await Users.findAll({})
+  const user = await findAllData()
   let UserFiltered = user
   if (user.length > 0) {
     UserFiltered = await filtered(req, user)
@@ -22,7 +17,7 @@ const getUsersService = async (req: any): Promise<any> => {
 
 const getUserService = async (req: any): Promise<any> => {
   const { id } = req.params
-  const user = await Users.findByPk(id)
+  const user = await findOneData(id)
   return user
 }
 
@@ -39,4 +34,4 @@ const deleteUserService = async (req: any): Promise<any> => {
   return await Users.destroy({ where: { id } })
 }
 
-export { insertUser, getUsersService, getUserService, updateUserService, deleteUserService }
+export { getUsersService, getUserService, updateUserService, deleteUserService }

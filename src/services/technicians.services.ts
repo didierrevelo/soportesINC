@@ -1,13 +1,8 @@
-import { Technicians, TechniciansAddModels } from '../models/technicians'
+import { Technicians, findAllData, findOneData } from '../models/technicians'
 import { filtered, filteredASC, filteredDESC } from '../utils/filter.handle'
 
-const insertTechnicians = async (technicians: TechniciansAddModels): Promise<any> => {
-  const responseInsert = await Technicians.create(technicians)
-  return responseInsert
-}
-
 const getTechniciansService = async (req: any): Promise<any> => {
-  const technicians = await Technicians.findAll({})
+  const technicians = await findAllData()
   let TechniciansFiltered = technicians
   if (technicians.length > 0) {
     TechniciansFiltered = await filtered(req, technicians)
@@ -22,7 +17,7 @@ const getTechniciansService = async (req: any): Promise<any> => {
 
 const getTechnicianservice = async (req: any): Promise<any> => {
   const { id } = req.params
-  const technicians = await Technicians.findByPk(id)
+  const technicians = await findOneData(id)
   return technicians
 }
 
@@ -39,4 +34,4 @@ const deleteTechniciansService = async (req: any): Promise<any> => {
   return await Technicians.destroy({ where: { id } })
 }
 
-export { insertTechnicians, getTechniciansService, getTechnicianservice, updateTechniciansService, deleteTechniciansService }
+export { getTechniciansService, getTechnicianservice, updateTechniciansService, deleteTechniciansService }

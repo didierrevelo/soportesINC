@@ -1,21 +1,36 @@
 import {
   Item,
-  ItemsAddModels
+  ItemsAddModels,
+  findAllData,
+  findOneData
 } from '../models/items'
 import { filtered, filteredASC, filteredDESC } from '../utils/filter.handle'
 
-const insertItem = async (items: ItemsAddModels): Promise<any> => {
-  const responseInsert = await Item.create(items)
+const insertItem = async (items: ItemsAddModels, req: any): Promise<any> => {
+  const {
+    id,
+    reference,
+    name,
+    amount,
+    description
+  } = items
+  const responseInsert = await Item.create({
+    id,
+    reference,
+    name,
+    amount,
+    description,
+    userId: req.user.id
+  })
   return responseInsert
 }
 
 const getItemsService = async (req: any): Promise<any> => {
-  const item = await Item.findAll({})
+  const item = await findAllData()
   let ItemsFiltered = item
   if (item.length > 0) {
     ItemsFiltered = await filtered(req, item)
   }
-  console.log(req.query.order)
   if (req.query.order === 'ASC') {
     ItemsFiltered = await filteredASC(req, item)
   } else if (req.query.order === 'DESC') {
@@ -26,7 +41,7 @@ const getItemsService = async (req: any): Promise<any> => {
 
 const getItemService = async (req: any): Promise<any> => {
   const { id } = req.params
-  const item = await Item.findByPk(id)
+  const item = await findOneData(id)
   return item
 }
 
