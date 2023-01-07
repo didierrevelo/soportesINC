@@ -1,6 +1,6 @@
 <h1 align="center">SoportesINC</h1>
 
-# CHALLENGE BACKEND - NodeJs-TypeScript-PostGresql-Eprex 🚀
+# CHALLENGE BACKEND - NodeJs-TypeScript-PostGresql-Express🚀
 
 ## Objective
 
