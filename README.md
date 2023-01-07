@@ -36,8 +36,6 @@ The challenge documentation is available using swagger through the endpoint:
 ```bash
 # working port of the express
 PORT=
-# NoSQL database connection path
-MONGODB_URI=
 # public file connection path 
 PUBLIC_URL=
 # secret key of JSON WEB TOKEN 
