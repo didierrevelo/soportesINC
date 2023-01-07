@@ -1,10 +1,10 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/postgres'
+import { Services } from './services'
 import {
   UsersModel,
   UsersAddModels
 } from '../interfaces/users.interfaces'
-import { Services } from './services'
 
 const Users = sequelize.define<UsersModel, UsersAddModels>(
   'users',
@@ -45,14 +45,54 @@ const Users = sequelize.define<UsersModel, UsersAddModels>(
   }
 )
 
-Users.hasMany(Services, {
-  foreignKey: 'userId',
-  sourceKey: 'id'
-})
+async function findAllData (): Promise<any> {
+  Users.hasMany(Services, {
+    foreignKey: 'userId',
+    sourceKey: 'id'
+  })
+  Services.belongsTo(Users, {
+    foreignKey: 'userId',
+    targetKey: 'id'
+  })
+  return await Users.findAll({
+    include: [
+      {
+        model: Services,
+        attributes: [
+          'id',
+          'typeService',
+          'visitDay',
+          'done',
+          'comments'
+        ]
+      }
+    ]
+  })
+}
+async function findOneData (id: any): Promise<any> {
+  Users.hasMany(Services, {
+    foreignKey: 'userId'
+  })
+  return await Users.findByPk(id, {
+    include: [
+      {
+        model: Services,
+        attributes: [
+          'id',
+          'typeService',
+          'visitDay',
+          'done',
+          'comments'
+        ]
+      }
+    ]
+  })
+}
 
-Services.belongsTo(Users, {
-  foreignKey: 'userId',
-  targetKey: 'id'
-})
-
-export { Users, UsersModel, UsersAddModels }
+export {
+  Users,
+  UsersModel,
+  UsersAddModels,
+  findOneData,
+  findAllData
+}

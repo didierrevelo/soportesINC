@@ -10,6 +10,7 @@ interface TechniciansAddModels {
   cellPhone: number
   address: string
   password: string
+  role: string
 }
 interface TechniciansModel extends Sequelize.Model<TechniciansModel, TechniciansAddModels> {
   id: number
@@ -19,6 +20,7 @@ interface TechniciansModel extends Sequelize.Model<TechniciansModel, Technicians
   cellPhone: number
   address: string
   password: string
+  role: string
   createdAt: string
   updatedAt: string
 }
@@ -31,6 +33,7 @@ interface TechniciansViewModel {
   cellPhone: number
   address: string
   password: string
+  role: string
 }
 
 export {

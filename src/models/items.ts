@@ -4,6 +4,7 @@ import {
   ItemsModel,
   ItemsAddModels
 } from '../interfaces/items.interfaces'
+import { Users } from './user'
 
 const Item = sequelize.define<ItemsModel, ItemsAddModels>('item', {
   id: {
@@ -26,7 +27,47 @@ const Item = sequelize.define<ItemsModel, ItemsAddModels>('item', {
   description: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  userId: {
+    type: Sequelize.INTEGER
   }
 })
 
-export { Item, ItemsAddModels, ItemsModel }
+async function findAllData (): Promise<any> {
+  Item.belongsTo(Users, {
+    foreignKey: 'userId'
+  })
+  return await Item.findAll({
+    include: [
+      {
+        model: Users,
+        attributes: [
+          'id',
+          'fullName',
+          'email',
+          'cellPhone'
+        ]
+      }
+    ]
+  })
+}
+async function findOneData (id: any): Promise<any> {
+  Item.belongsTo(Users, {
+    foreignKey: 'userId'
+  })
+  return await Item.findByPk(id, {
+    include: [
+      {
+        model: Users,
+        attributes: [
+          'id',
+          'fullName',
+          'email',
+          'cellPhone'
+        ]
+      }
+    ]
+  })
+}
+
+export { Item, ItemsAddModels, ItemsModel, findAllData, findOneData }

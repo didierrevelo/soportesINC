@@ -4,6 +4,7 @@ import {
   ServicesModel,
   ServicesAddModels
 } from '../interfaces/services.interfaces'
+import { Technicians } from './technicians'
 
 const Services = sequelize.define<ServicesModel, ServicesAddModels>(
   'services',
@@ -28,6 +29,9 @@ const Services = sequelize.define<ServicesModel, ServicesAddModels>(
     },
     technicianId: {
       type: DataTypes.INTEGER
+    },
+    userId: {
+      type: DataTypes.INTEGER
     }
   },
   {
@@ -35,4 +39,38 @@ const Services = sequelize.define<ServicesModel, ServicesAddModels>(
   }
 )
 
-export { Services, ServicesModel, ServicesAddModels }
+async function findAllData (): Promise<any> {
+  Services.belongsTo(Technicians, {
+    foreignKey: 'technicianId'
+  })
+  return await Services.findAll({
+    include: [
+      {
+        model: Technicians,
+        attributes: [
+          'fullName',
+          'email',
+          'cellPhone'
+        ]
+      }
+    ]
+  })
+}
+async function findOneData (id: any): Promise<any> {
+  Services.belongsTo(Technicians, {
+    foreignKey: 'technicianId'
+  })
+  return await Services.findByPk(id, {
+    include: [
+      {
+        model: Technicians,
+        attributes: [
+          'fullName',
+          'email',
+          'cellPhone'
+        ]
+      }
+    ]
+  })
+}
+export { Services, ServicesModel, ServicesAddModels, findAllData, findOneData }

@@ -9,6 +9,7 @@ interface ServicesAddModels {
   done: boolean
   comments: string
   technicianId: number
+  userId: number
 }
 
 interface ServicesModel extends Sequelize.Model<ServicesModel, ServicesAddModels> {
@@ -18,6 +19,7 @@ interface ServicesModel extends Sequelize.Model<ServicesModel, ServicesAddModels
   done: boolean
   comments: string
   technicianId: number
+  userId: number
   createdAt: string
   updatedAt: string
 }
@@ -29,6 +31,7 @@ interface ServicesViewModel {
   done: boolean
   comments: string
   technicianId: number
+  userId: number
 }
 
 export {

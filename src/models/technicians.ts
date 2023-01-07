@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/postgres'
-// import { Services } from './services'
+import { Services } from './services'
 import {
   TechniciansModel,
   TechniciansAddModels
@@ -34,6 +34,10 @@ const Technicians = sequelize.define<TechniciansModel, TechniciansAddModels>(
     },
     password: {
       type: DataTypes.STRING
+    },
+    role: {
+      type: DataTypes.ENUM('tech'),
+      defaultValue: 'tech'
     }
   },
   {
@@ -41,14 +45,52 @@ const Technicians = sequelize.define<TechniciansModel, TechniciansAddModels>(
   }
 )
 
-// Technicians.hasMany(Services, {
-//   foreignKey: 'technicianId',
-//   sourceKey: 'id'
-// })
+async function findAllData (): Promise<any> {
+  Technicians.hasMany(Services, {
+    foreignKey: 'technicianId'
+  })
 
-// Services.belongsTo(Technicians, {
-//   foreignKey: 'technicianId',
-//   targetKey: 'id'
-// })
+  return await Technicians.findAll({
+    include: [
+      {
+        model: Services,
+        attributes: [
+          'id',
+          'typeService',
+          'visitDay',
+          'done',
+          'comments'
+        ]
+      }
+    ]
+  })
+}
 
-export { Technicians, TechniciansModel, TechniciansAddModels }
+async function findOneData (id: any): Promise<any> {
+  Technicians.hasMany(Services, {
+    foreignKey: 'technicianId'
+  })
+
+  return await Technicians.findByPk(id, {
+    include: [
+      {
+        model: Services,
+        attributes: [
+          'id',
+          'typeService',
+          'visitDay',
+          'done',
+          'comments'
+        ]
+      }
+    ]
+  })
+}
+
+export {
+  Technicians,
+  TechniciansModel,
+  TechniciansAddModels,
+  findOneData,
+  findAllData
+}
