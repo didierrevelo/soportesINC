@@ -40,11 +40,11 @@ const updateUser = async (req: any, res: Response): Promise<any> => {
 const deleteUser = async (req: any, res: Response): Promise<any> => {
   try {
     const { id } = req.params
-    await deleteUserService(id)
+    await deleteUserService(req)
     res.send(`Service with id ${Number(id)} was deleted`)
     res.status(204)
   } catch (error) {
-    handleHttp(res, 'ERROR_DELETE_Service', error)
+    handleHttp(res, 'ERROR_DELETE_USER', error)
   }
 }
 

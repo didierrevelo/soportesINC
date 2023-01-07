@@ -5,7 +5,7 @@ import {
   getTechnicianservice,
   updateTechniciansService,
   deleteTechniciansService
-} from '../services/tehcnicians.services'
+} from '../services/technicians.services'
 
 const getTechnician = async (req: any, res: Response): Promise<any> => {
   try {
@@ -40,11 +40,11 @@ const updateTechnician = async (req: any, res: Response): Promise<any> => {
 const deleteTechnician = async (req: any, res: Response): Promise<any> => {
   try {
     const { id } = req.params
-    await deleteTechniciansService(id)
+    await deleteTechniciansService(req)
     res.send(`Service with id ${Number(id)} was deleted`)
     res.status(204)
   } catch (error) {
-    handleHttp(res, 'ERROR_DELETE_Service', error)
+    handleHttp(res, 'ERROR_DELETE_TECHNICIAN', error)
   }
 }
 

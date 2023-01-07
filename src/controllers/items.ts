@@ -34,7 +34,7 @@ const updateItem = async (req: Request, res: Response): Promise<any> => {
 
 const postItem = async (req: Request, res: Response): Promise<any> => {
   try {
-    const newItem = await insertItem(req.body)
+    const newItem = await insertItem(req.body, req)
     res.status(201).json(newItem)
   } catch (error) {
     handleHttp(res, 'ERROR_POST_ITEM', error)

@@ -1,10 +1,10 @@
 import { Response } from 'express'
 import { handleHttp } from '../utils/error.handle'
-import { insertTechnicians } from '../services/tehcnicians.services'
-import { insertUser } from '../services/user.services'
+import { insertTechnicians, insertUser, loginTechnician, loginUser } from '../services/auth.services'
 
 const RegisterTechnician = async (req: any, res: Response): Promise<any> => {
   try {
+    console.log(req.body)
     const newTechnicain = await insertTechnicians(req.body)
     res.status(201).json(newTechnicain)
   } catch (error) {
@@ -21,17 +21,31 @@ const registerUser = async (req: any, res: Response): Promise<any> => {
   }
 }
 
-// const TechLoginCtrol = async (req: any, res: Response): Promise<any> => {
+const TechLoginCtrol = async (req: any, res: Response): Promise<any> => {
+  const { email, password } = req.body
+  const responseUser = await loginTechnician({ email, password })
+  if (responseUser === 'PASSWORD_INCORRECT') {
+    res.status(403)
+    res.send(responseUser)
+  } else {
+    res.send(responseUser)
+  }
+}
 
-// }
-
-// const userLoginCtrol = async (req: any, res: Response): Promise<any> => {
-
-// }
+const userLoginCtrol = async (req: any, res: Response): Promise<any> => {
+  const { email, password } = req.body
+  const responseUser = await loginUser({ email, password })
+  if (responseUser === 'PASSWORD_INCORRECT') {
+    res.status(403)
+    res.send(responseUser)
+  } else {
+    res.send(responseUser)
+  }
+}
 
 export {
   RegisterTechnician,
-  registerUser
-  // TechLoginCtrol,
-  // userLoginCtrol
+  registerUser,
+  TechLoginCtrol,
+  userLoginCtrol
 }

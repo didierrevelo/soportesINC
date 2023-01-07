@@ -34,7 +34,7 @@ const updateService = async (req: any, res: Response): Promise<any> => {
 
 const postService = async (req: any, res: Response): Promise<any> => {
   try {
-    const newService = await insertServices(req.body)
+    const newService = await insertServices(req.body, req)
     res.status(201).json(newService)
   } catch (error) {
     handleHttp(res, 'ERROR_POST_SERVICE', error)
@@ -44,7 +44,7 @@ const postService = async (req: any, res: Response): Promise<any> => {
 const deleteService = async (req: any, res: Response): Promise<any> => {
   try {
     const { id } = req.params
-    await deleteServicesService(id)
+    await deleteServicesService(req)
     res.send(`Service with id ${Number(id)} was deleted`)
     res.status(204)
   } catch (error) {
