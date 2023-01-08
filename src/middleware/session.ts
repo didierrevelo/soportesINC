@@ -2,6 +2,7 @@ import { NextFunction, Response } from 'express'
 import { verifyToken } from '../utils/jwt.handle'
 import { handleHttp } from '../utils/error.handle'
 import { Users } from '../models/user'
+import { Technicians } from '../models/technicians'
 
 const checkJwt = async (req: any, res: Response, next: NextFunction): Promise<any> => {
   try {
@@ -17,9 +18,14 @@ const checkJwt = async (req: any, res: Response, next: NextFunction): Promise<an
       handleHttp(res, 'NOT_PAYLOAD_DATA', 401)
       return
     }
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       where: { email: verifiedToken.email }
     })
+    if (user === null) {
+      user = await Technicians.findOne({
+        where: { email: verifiedToken.email }
+      })
+    }
     if (verifiedToken !== null) {
       req.user = user
       next()
