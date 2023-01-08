@@ -9,32 +9,32 @@ const router = Router()
 
 /**
  * Creating a route for the `GET` method.
- * http://localhost:3001/item [GET]
+ * http://localhost:3001/soporteinc/item [GET]
  */
 router.get('/', checkJwt, getItems)
 
 /**
  * Creating a route for the `POST` method.
- * http://localhost:3001/item [POST]
+ * http://localhost:3001/soporteinc/item [POST]
  */
-router.post('/', checkJwt, validatorItems, checkRol(['admin', 'tech']), postItem)
+router.post('/create', checkJwt, validatorItems, checkRol(['admin', 'tech']), postItem)
 
 /**
  * Creating a route for the `GET` method.
- * http://localhost:3001/item/id [GET]
+ * http://localhost:3001/soporteinc/item/id [GET]
  */
 router.get('/:id', checkJwt, getItem)
 
 /**
  * Creating a route for the `PUT` method.
- * http://localhost:3001/item/id [PUT]
+ * http://localhost:3001/soporteinc/item/id [PUT]
  */
-router.put('/:id', checkJwt, validatorItems, checkRol(['admin', 'tech']), updateItem)
+router.put('/put/:id', checkJwt, validatorItems, checkRol(['admin', 'tech']), updateItem)
 
 /**
  * Creating a route for the `DELETE` method.
- * http://localhost:3001/item/id [DELETE]
+ * http://localhost:3001/soporteinc/item/id [DELETE]
  */
-router.delete('/:id', checkJwt, checkRol(['admin', 'tech']), deleteItem)
+router.delete('/delete/:id', checkJwt, checkRol(['admin', 'tech']), deleteItem)
 
 export { router }

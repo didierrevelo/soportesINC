@@ -17,7 +17,7 @@ router.get('/', checkJwt, checkRol(['admin', 'tech']), getServices)
  * Creating a route for the `POST` method.
  * http://localhost:3001/services [POST]
  */
-router.post('/', checkJwt, validatorServices, postService)
+router.post('/create', checkJwt, validatorServices, postService)
 
 /**
  * Creating a route for the `GET` method.
@@ -29,12 +29,12 @@ router.get('/:id', checkJwt, getService)
  * Creating a route for the `PUT` method.
  * http://localhost:3001/services/id [PUT]
  */
-router.put('/:id', checkJwt, validatorServices, checkRol(['admin', 'tech']), updateService)
+router.put('/put/:id', checkJwt, validatorServices, checkRol(['admin', 'tech']), updateService)
 
 /**
  * Creating a route for the `DELETE` method.
  * http://localhost:3001/services/id [DELETE]
  */
-router.delete('/:id', checkJwt, checkRol(['admin', 'tech']), deleteService)
+router.delete('/delete/:id', checkJwt, checkRol(['admin', 'tech']), deleteService)
 
 export { router }

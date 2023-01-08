@@ -23,12 +23,12 @@ router.get('/:id', checkJwt, getUser)
  * Creating a route for the `PUT` method.
  * http://localhost:3001/users/id [PUT]
  */
-router.put('/:id', checkJwt, validatorRegister, checkRol(['admin']), updateUser)
+router.put('/put/:id', checkJwt, validatorRegister, checkRol(['admin']), updateUser)
 
 /**
  * Creating a route for the `DELETE` method.
  * http://localhost:3001/users/id [DELETE]
  */
-router.delete('/:id', checkJwt, checkRol(['admin']), deleteUser)
+router.delete('/delete/:id', checkJwt, checkRol(['admin']), deleteUser)
 
 export { router }
