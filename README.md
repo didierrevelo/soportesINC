@@ -1,6 +1,6 @@
 <h1 align="center">SoportesINC</h1>
 
-# CHALLENGE BACKEND - NodeJs-TypeScript-PostGresql-Express🚀
+## CHALLENGE BACKEND - NodeJs-TypeScript-PostGresql-Express🚀
 
 ## Objective
 
@@ -27,9 +27,14 @@ The challenge documentation is available using swagger through the endpoint:
 
 ```http://localhost:{puerto}/soportesinc```
 
+```http://localhost:3001/soportesinc/```
+
 ## Documentation
 
-```http://localhost:3001/soportesinc/documentation/```
+## [SWAGGER](http://localhost:3001/soportesinc/documentation/)  
+```http://localhost:3001/soportesinc/documentation```
+
+## [POSTMAN](https://elements.getpostman.com/redirect?entityId=16551132-a7e631cb-6f7a-4b9c-b94a-03091fa7b091&entityType=collection)
 
 ```https://elements.getpostman.com/redirect?entityId=16551132-a7e631cb-6f7a-4b9c-b94a-03091fa7b091&entityType=collection```
 
