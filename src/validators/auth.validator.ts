@@ -21,7 +21,8 @@ const validatorRegister = [
   check('cellPhone')
     .exists()
     .notEmpty()
-    .isLength({ min: 3, max: 12 })
+    .isNumeric()
+    .isLength({ min: 3, max: 16 })
     .withMessage('Cell phone is required'),
   check('address')
     .exists()
@@ -31,7 +32,7 @@ const validatorRegister = [
   check('password')
     .exists()
     .notEmpty()
-    .isLength({ min: 6, max: 16 })
+    .isLength({ min: 6, max: 45 })
     .withMessage('Password is required'),
   (req: any, res: any, next: NextFunction) => {
     return validateResults(req, res, next)

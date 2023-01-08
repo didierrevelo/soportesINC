@@ -3,7 +3,7 @@ import { validateResults } from '../utils/handleValidator'
 import { check } from 'express-validator'
 
 const validatorItems = [
-  check('references')
+  check('reference')
     .exists()
     .notEmpty()
     .isLength({ min: 3, max: 99 })
@@ -11,12 +11,12 @@ const validatorItems = [
   check('name')
     .exists()
     .notEmpty()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 3, max: 50 })
     .withMessage('Name is required'),
   check('amount')
     .exists()
     .notEmpty()
-    .isLength({ min: 3, max: 12 })
+    .isLength({ min: 0, max: 12 })
     .withMessage('Amount is required'),
   check('description')
     .exists()
