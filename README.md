@@ -27,9 +27,11 @@ The challenge documentation is available using swagger through the endpoint:
 
 ```http://localhost:{puerto}/soportesinc```
 
-## Swagger Documentation
+## Documentation
 
-```http://localhost:3000/documentation/```
+```http://localhost:3001/soportesinc/documentation/```
+
+```https://elements.getpostman.com/redirect?entityId=16551132-a7e631cb-6f7a-4b9c-b94a-03091fa7b091&entityType=collection```
 
 ## .env configuration
 
